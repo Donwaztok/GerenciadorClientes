@@ -4,12 +4,13 @@
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/201ed8426e.js" crossorigin="anonymous"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <head>
     <title>Gerenciador de Clientes</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="Images/icon.png">
+    <link rel="icon" href="Images/icon.ico">
 </head>
 
 <body>
@@ -35,7 +36,7 @@
                         ?>
                         <div class="row">
                             <div class="col-lg-12">
-                                <form id="login-form" action="Clientes.php" method="post" role="form" style="display: block;">
+                                <form id="login-form" action="Home.php" method="post" role="form" style="display: block;">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
@@ -50,12 +51,9 @@
                                         </div>
                                     </div>
                                 </form>
-                                <form id="register-form" action="Clientes.php" method="post" role="form" style="display: none;">
+                                <form id="register-form" action="Home.php" method="post" role="form" style="display: none;">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="name" id="name" tabindex="2" class="form-control" placeholder="Nome" value="">
                                     </div>
                                     <div class="form-group">
                                         <input type="email" name="email" id="email" tabindex="3" class="form-control" placeholder="Email" value="">
