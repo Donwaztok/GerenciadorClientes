@@ -145,6 +145,21 @@ if (isset($_POST['btn-login'])) {
             $clientMsg = "Falha ao alterar cliente.";
         }
     }
+} else if (isset($_GET['del'])) {
+    $del = $_GET['del'];
+
+    if($del > 0){
+        $query = "DELETE FROM Cliente WHERE ID_Cliente=$del;";
+        $res = mysqli_query($con, $query);
+
+        if ($res) {
+            $clientError = false;
+            $clientMsg = "Cliente deletado com Sucesso.";
+        } else {
+            $clientError = true;
+            $clientMsg = "Falha ao deletar cliente.";
+        }
+    }
 }
 
 if ($error == true) {
@@ -221,7 +236,9 @@ mysqli_close($con);
                                         <button type="submit" name="view-client" id="view-client" class="btn" value="">
                                             <i class="fas fa-eye"></i></button>
                                         <button type="submit" name="edit-client" id="edit-client" class="btn" value="">
-                                            <i class="fas fa-edit"></i></button></form>
+                                            <i class="fas fa-edit"></i></button>
+                                        <a <?php echo 'href="?del=' . $clients["ID_Cliente"] . '"' ?> class="btn btn-light"><i style="color: Tomato;" class="fas fa-trash"></i></a>
+                                    </form>
                                 </td>
                             </tr> <?php
                                 }

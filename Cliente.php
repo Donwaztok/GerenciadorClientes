@@ -17,11 +17,6 @@ if (isset($_POST['view-client']) || isset($_POST['edit-client'])) {
         $view = true;
 }
 
-if ($id > 0) {
-    $res = mysqli_query($con, "SELECT * FROM Cliente WHERE ID_Cliente = $id");
-    $row = mysqli_fetch_array($res);
-}
-
 if (isset($_POST['btn-add-end'])) {
     $rua = trim($_POST['Rua']);
     $numero = $_POST['Numero'];
@@ -82,6 +77,27 @@ if (isset($_POST['btn-add-end'])) {
             $endMsg = "Falha ao alterar endereço. $query";
         }
     }
+} else if (isset($_GET['del'])) {
+    $del = $_GET['del'];
+    $id = $_GET['id'];
+
+    if($del > 0){
+        $query = "DELETE FROM Endereco WHERE ID_Endereco=$del;";
+        $res = mysqli_query($con, $query);
+
+        if ($res) {
+            $endError = false;
+            $endMsg = "Endereço deletado com Sucesso.";
+        } else {
+            $endError = true;
+            $endMsg = "Falha ao deletar endereço.";
+        }
+    }
+}
+
+if ($id > 0) {
+    $res = mysqli_query($con, "SELECT * FROM Cliente WHERE ID_Cliente = $id");
+    $row = mysqli_fetch_array($res);
 }
 
 //Endereços
@@ -154,7 +170,7 @@ mysqli_close($con);
                     <label for="example-tel-input" class="col-sm-2 col-form-label">Telefone</label>
                     <div class="col-sm-10">
                         <input class="form-control" type="text" name="tel" id="tel" placeholder="(99) 9 9999-9999" <?php if ($id > 0) echo 'value="' . $row['Telefone'] . '"';
-                                                                                    if ($view) echo ' disabled'; ?>>
+                                                                                                                    if ($view) echo ' disabled'; ?>>
                     </div>
                 </div>
                 <div class="form-group">
@@ -211,7 +227,9 @@ mysqli_close($con);
                                                 <button type="submit" name="view-end" id="view-end" class="btn" value="">
                                                     <i class="fas fa-eye"></i></button>
                                                 <button type="submit" name="edit-end" id="edit-end" class="btn" value="">
-                                                    <i class="fas fa-edit"></i></button></form>
+                                                    <i class="fas fa-edit"></i></button>
+                                                <a <?php echo 'href="?del=' . $endereco["ID_Endereco"] . "&id=" . $endereco["ID_Cliente"] . '"' ?> class="btn btn-light"><i style="color: Tomato;" class="fas fa-trash"></i></a>
+                                            </form>
                                         </td>
                                     </tr> <?php
                                         }
