@@ -191,15 +191,13 @@ mysqli_close($con);
 
 <body>
     <div class="container panel panel-login" style="padding-top: 10px; padding-bottom: 1px;">
-        <div class="row">
-            <?php
-            if (!empty($clientMsg))
-                if ($clientError)
-                    echo "<div class=\"alert alert-danger\" role=\"alert\">$clientMsg</div>";
-                else
-                    echo "<div class=\"alert alert-success\" role=\"alert\">$clientMsg</div>";
-            ?>
-        </div>
+        <?php
+        if (!empty($clientMsg))
+            if ($clientError)
+                echo "<div class=\"alert alert-danger\" style=\"width: 100%;\" role=\"alert\">$clientMsg</div>";
+            else
+                echo "<div class=\"alert alert-success\" style=\"width: 100%;\" role=\"alert\">$clientMsg</div>";
+        ?>
         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
             <div class="input-group">
                 <h2>Gerenciador de Clientes</h2>

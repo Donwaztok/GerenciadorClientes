@@ -122,9 +122,9 @@ mysqli_close($con);
         <?php
         if (!empty($endMsg))
             if ($endError)
-                echo "<div class=\"alert alert-danger\" role=\"alert\">$endMsg</div>";
+                echo "<div class=\"alert alert-danger\"  style=\"width: 100%;\" role=\"alert\">$endMsg</div>";
             else
-                echo "<div class=\"alert alert-success\" role=\"alert\">$endMsg</div>";
+                echo "<div class=\"alert alert-success\"  style=\"width: 100%;\" role=\"alert\">$endMsg</div>";
         ?>
         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
             <div class="input-group">
