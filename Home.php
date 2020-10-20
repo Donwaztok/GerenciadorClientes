@@ -148,7 +148,7 @@ if (isset($_POST['btn-login'])) {
 } else if (isset($_GET['del'])) {
     $del = $_GET['del'];
 
-    if($del > 0){
+    if ($del > 0) {
         $query = "DELETE FROM Cliente WHERE ID_Cliente=$del;";
         $res = mysqli_query($con, $query);
 
@@ -181,19 +181,16 @@ mysqli_close($con);
 <!DOCTYPE html>
 <html>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/201ed8426e.js" crossorigin="anonymous"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
 <head>
     <title>Gerenciador de Clientes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/201ed8426e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="Images/icon.ico">
 </head>
 
 <body>
-    <div class="container">
+    <div class="container panel panel-login" style="padding-top: 10px; padding-bottom: 1px;">
         <div class="row">
             <?php
             if (!empty($clientMsg))
@@ -202,52 +199,60 @@ mysqli_close($con);
                 else
                     echo "<div class=\"alert alert-success\" role=\"alert\">$clientMsg</div>";
             ?>
-            <h1>Gerenciador de Clientes</h1>
-            <a class="btn btn-primary" href="Cliente.php" role="button">Adicionar Cliente</a>
         </div>
-        <div class="row">
-            <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th class="th-sm">#</th>
-                        <th class="th-sm">Nome</th>
-                        <th class="th-sm">Nascimento</th>
-                        <th class="th-sm">CPF</th>
-                        <th class="th-sm">RG</th>
-                        <th class="th-sm">Telefone</th>
-                        <th class="th-sm">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if (mysqli_num_rows($clients_result) > 0) {
-                        while ($clients = mysqli_fetch_assoc($clients_result)) { ?>
-                            <tr>
-                                <td> <?php echo $clients["ID_Cliente"] ?> </td>
-                                <td> <?php echo $clients["Nome"]  ?> </td>
-                                <?php $date = new DateTime($clients["Nasc"]); ?>
-                                <td> <?php echo $date->format('d/m/Y') ?> </td>
-                                <td> <?php echo $clients["CPF"]  ?> </td>
-                                <td> <?php echo $clients["RG"] ?> </td>
-                                <td> <?php echo $clients["Telefone"]  ?> </td>
-                                <td>
-                                    <form id="client-form" action="Cliente.php" method="POST" role="form">
-                                        <input type="hidden" class="form-control" name="id" id="id" <?php echo 'value="' . $clients["ID_Cliente"] . '"' ?>>
-                                        <button type="submit" name="view-client" id="view-client" class="btn" value="">
-                                            <i class="fas fa-eye"></i></button>
-                                        <button type="submit" name="edit-client" id="edit-client" class="btn" value="">
-                                            <i class="fas fa-edit"></i></button>
-                                        <a <?php echo 'href="?del=' . $clients["ID_Cliente"] . '"' ?> class="btn btn-light"><i style="color: Tomato;" class="fas fa-trash"></i></a>
-                                    </form>
-                                </td>
-                            </tr> <?php
-                                }
+        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="input-group">
+                <h2>Gerenciador de Clientes</h2>
+            </div>
+            <div class="btn-group" role="group" aria-label="First group">
+                <a class="btn btn-primary" href="Cliente.php" role="button">Adicionar Cliente</a>
+            </div>
+        </div>
+        <br>
+        <table class="table table-striped table-bordered table-hover table-sm">
+            <thead>
+                <tr>
+                    <th class="th-sm">#</th>
+                    <th class="th-sm">Nome</th>
+                    <th class="th-sm">Nascimento</th>
+                    <th class="th-sm">CPF</th>
+                    <th class="th-sm">RG</th>
+                    <th class="th-sm">Telefone</th>
+                    <th class="th-sm">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if (mysqli_num_rows($clients_result) > 0) {
+                    while ($clients = mysqli_fetch_assoc($clients_result)) { ?>
+                        <tr>
+                            <td> <?php echo $clients["ID_Cliente"] ?> </td>
+                            <td> <?php echo $clients["Nome"]  ?> </td>
+                            <?php $date = new DateTime($clients["Nasc"]); ?>
+                            <td> <?php echo $date->format('d/m/Y') ?> </td>
+                            <td> <?php echo $clients["CPF"]  ?> </td>
+                            <td> <?php echo $clients["RG"] ?> </td>
+                            <td> <?php echo $clients["Telefone"]  ?> </td>
+                            <td>
+                                <form id="client-form" action="Cliente.php" method="POST" role="form">
+                                    <input type="hidden" class="form-control" name="id" id="id" <?php echo 'value="' . $clients["ID_Cliente"] . '"' ?>>
+                                    <button type="submit" name="view-client" id="view-client" class="btn" value="">
+                                        <i class="fas fa-eye"></i></button>
+                                    <button type="submit" name="edit-client" id="edit-client" class="btn" value="">
+                                        <i class="fas fa-edit"></i></button>
+                                    <a <?php echo 'href="?del=' . $clients["ID_Cliente"] . '"' ?> class="btn btn-light"><i style="color: Tomato;" class="fas fa-trash"></i></a>
+                                </form>
+                            </td>
+                        </tr> <?php
                             }
-                                    ?>
-                </tbody>
-            </table>
-        </div>
+                        }
+                                ?>
+            </tbody>
+        </table>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>
